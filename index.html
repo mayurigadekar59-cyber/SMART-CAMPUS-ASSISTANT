@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Campus Assistant</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <section id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <div class="login-brand"><div class="brand-icon">SC</div><div><strong>Smart Campus</strong><small>Assistant Portal</small></div></div>
+      <div class="login-title"><span class="login-badge">SECURE CAMPUS PORTAL</span><h1>Welcome back 👋</h1><p>Choose your account type to continue.</p></div>
+      <div class="role-tabs"><button class="role-tab active" data-role="student">🎓 Student Login</button><button class="role-tab" data-role="admin">🛡️ Admin Login</button></div>
+      <form id="loginForm" class="login-form">
+        <label>Username / Student ID<input id="loginUsername" required autocomplete="username" placeholder="Enter username"></label>
+        <label>Password<input id="loginPassword" required type="password" autocomplete="current-password" placeholder="Enter password"></label>
+        <button class="login-btn" type="submit">Login <span>→</span></button>
+        <div id="loginError" class="login-error"></div>
+      </form>
+      <div class="demo-credentials"><strong>Demo credentials</strong><span id="credentialHint">Student: student / student123</span><span>Admin: admin / admin123</span></div>
+    </div>
+  </section>
+
+  <div class="app-shell" id="studentApp">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-icon">SC</div><div><strong>Smart Campus</strong><small>Assistant Portal</small></div></div>
+      <div class="student-mini"><div class="avatar">MG</div><div><strong>Mayuri G.</strong><small>BCS Student</small></div></div>
+      <nav class="nav">
+        <button class="nav-link active" data-view="dashboard">⌂ <span>Dashboard</span></button>
+        <button class="nav-link" data-view="notices">▤ <span>Notices</span><b class="nav-count">3</b></button>
+        <button class="nav-link" data-view="timetable">▦ <span>Timetable</span></button>
+        <button class="nav-link" data-view="attendance">◷ <span>Attendance</span></button>
+        <button class="nav-link" data-view="events">✦ <span>Campus Events</span></button>
+        <button class="nav-link" data-view="assistant">✧ <span>AI Assistant</span></button><button class="nav-link admin-only" data-view="admin">⚙ <span>Admin Panel</span></button>
+      </nav>
+      <div class="sidebar-bottom"><div class="help-icon">?</div><div><strong>Need help?</strong><small>Ask the campus assistant</small></div><button id="helpBtn" aria-label="Open help">›</button></div><button id="logoutBtn" class="logout-btn">↪ Logout</button>
+    </aside>
+    <main class="main">
+      <header class="topbar">
+        <div><div class="eyebrow">STUDENT PORTAL / <span id="crumb">DASHBOARD</span></div><h1 id="pageTitle">Good morning, Mayuri! <span>☀️</span></h1><p id="pageSubtitle">Here’s what’s happening on your campus today.</p></div>
+        <div class="top-actions"><button class="icon-btn admin-only" id="adminShortcut" title="Admin panel">⚙</button><button class="icon-btn" id="notificationBtn" title="Notifications">♧<i></i></button><div class="top-avatar" id="topAvatar">MG</div></div>
+      </header>
+      <section id="dashboardView" class="view active">
+        <div class="welcome-banner"><div><span class="banner-tag">MONDAY • STUDENT OVERVIEW</span><h2>Your campus, all in one place.</h2><p>Stay on top of classes, attendance, notices, and campus life.</p><button class="primary-btn" data-go="assistant">Ask Campus Assistant <span>→</span></button></div><div class="banner-art"><div class="art-circle">✦</div><div class="art-card card-one">📚 <span>Learn</span></div><div class="art-card card-two">🎓 <span>Grow</span></div><div class="art-card card-three">💡 <span>Explore</span></div></div></div>
+        <div class="section-heading"><div><h2>Your overview</h2><p>A quick snapshot of your student activity.</p></div><span class="date-chip">◷ &nbsp; Academic Year 2026–27</span></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon purple">◷</span><span class="trend good">+2.4%</span></div><p>Overall attendance</p><div class="stat-value">82<span>%</span></div><div class="progress"><i style="width:82%"></i></div><small>Minimum required: 75%</small></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon blue">▦</span><span class="soft-label">Today</span></div><p>Classes scheduled</p><div class="stat-value">4</div><small class="muted">Next class at 11:00 AM</small></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon orange">▤</span><span class="notice-dot">● New</span></div><p>New notices</p><div class="stat-value">3</div><small class="muted">1 important announcement</small></article>
+          <article class="stat-card"><div class="stat-top"><span class="stat-icon green">✦</span><span class="soft-label">Upcoming</span></div><p>Campus events</p><div class="stat-value">2</div><small class="muted">Next event: 18 October</small></article>
+        </div>
+        <div class="content-grid">
+          <section class="panel"><div class="panel-head"><div><h2>Today’s timetable</h2><p>Your classes for Monday</p></div><button class="text-btn" data-go="timetable">Full timetable →</button></div><div id="todaySchedule" class="schedule-list"></div></section>
+          <section class="panel"><div class="panel-head"><div><h2>Latest notices</h2><p>Updates from your campus</p></div><button class="text-btn" data-go="notices">View all →</button></div><div id="latestNotices" class="notice-list"></div></section>
+        </div>
+        <section class="assistant-promo"><div class="assistant-spark">✧</div><div><h3>Have a campus question?</h3><p>Your Smart Campus Assistant can help you find classes, check attendance, and discover events.</p></div><button class="secondary-btn" data-go="assistant">Chat now <span>→</span></button></section>
+      </section>
+      <section id="noticesView" class="view"><div class="page-intro"><h2>Campus notices</h2><p>Stay updated with academic announcements and campus news.</p></div><div class="toolbar"><input id="noticeSearch" type="search" placeholder="Search notices..." /><select id="noticeFilter"><option value="all">All categories</option><option value="IMPORTANT">Important</option><option value="ACADEMIC">Academic</option><option value="EVENT">Events</option></select></div><div id="allNotices" class="notice-grid"></div></section>
+      <section id="timetableView" class="view"><div class="page-intro"><h2>Weekly timetable</h2><p>Your class schedule for the current semester.</p></div><div class="day-tabs" id="dayTabs"></div><section class="panel"><div class="panel-head"><div><h2 id="selectedDayTitle">Monday’s classes</h2><p>Check room numbers and faculty details before class.</p></div><span class="date-chip">BCS • Semester VI</span></div><div id="daySchedule" class="schedule-list"></div></section></section>
+      <section id="attendanceView" class="view"><div class="page-intro"><h2>Attendance tracker</h2><p>Monitor attendance subject-wise and keep track of requirements.</p></div><div class="attendance-summary"><div class="attendance-big"><span>Overall attendance</span><strong>82<small>%</small></strong><div class="progress"><i style="width:82%"></i></div><p>You're above the 75% minimum requirement.</p></div><div class="attendance-detail"><div><span>Classes attended</span><strong>82 / 100</strong></div><div><span>Minimum required</span><strong>75%</strong></div><div><span>Status</span><strong class="status-good">On track ✓</strong></div></div></div><section class="panel"><div class="panel-head"><div><h2>Subject-wise attendance</h2><p>Demo data for project presentation</p></div></div><div id="attendanceRows" class="attendance-rows"></div></section><div class="info-note">ⓘ This is a demonstration dashboard. In a live campus system, attendance data would come from the college database.</div></section>
+      <section id="eventsView" class="view"><div class="page-intro"><h2>Campus events</h2><p>Discover activities, workshops, and opportunities around campus.</p></div><div id="eventsGrid" class="events-grid"></div></section>
+      <section id="assistantView" class="view"><div class="page-intro"><h2>AI Campus Assistant</h2><p>Ask a question about your timetable, attendance, notices, or campus events.</p></div><div class="chat-layout"><div class="chat-main"><div class="chat-head"><div class="bot-avatar">✧</div><div><strong>Campus Buddy</strong><small><span class="online-dot"></span> Online • Demo assistant</small></div><button class="clear-chat" id="clearChat">Clear chat</button></div><div class="chat-messages" id="chatMessages"><div class="message bot"><div class="message-avatar">✧</div><div><div class="bubble">Hi Mayuri! 👋 I’m your Smart Campus Assistant. You can ask me about your attendance, next class, notices, or upcoming events.</div><small>Campus Buddy • Just now</small></div></div></div><div class="suggestions"><button data-question="What is my attendance?">My attendance</button><button data-question="What is my next class?">Next class</button><button data-question="Any important notices?">Important notices</button><button data-question="What events are coming?">Upcoming events</button></div><form id="chatForm" class="chat-input"><input id="chatInput" placeholder="Ask me anything about campus..." autocomplete="off" /><button type="submit" aria-label="Send message">↑</button></form></div><aside class="chat-side"><h3>Try asking</h3><p>Here are some things I can help with.</p><button data-question="Where is DBMS class?">📍 Where is my DBMS class?</button><button data-question="What is my attendance?">◷ Check my attendance</button><button data-question="Any important notices?">▤ Show important notices</button><button data-question="What events are coming?">✦ Find campus events</button><div class="demo-disclaimer">✨ <strong>Project demo</strong><br/>This assistant uses predefined JavaScript responses. It does not connect to a real college database or external AI service.</div></aside></div></section>
+
+      <section id="adminView" class="view admin-view">
+        <div class="page-intro"><h2>Admin Control Center</h2><p>Manage students, attendance, notices, and important campus information.</p></div>
+        <div class="admin-stats" id="adminStats"></div>
+        <div class="admin-grid">
+          <section class="panel"><div class="panel-head"><div><h2>Add / Update Student</h2><p>Student information is stored in this browser for the demo.</p></div></div>
+            <form id="studentForm" class="admin-form"><input type="hidden" id="editStudentId"><label>Student ID<input id="studentId" required placeholder="e.g. STU102"></label><label>Full name<input id="studentName" required placeholder="Student name"></label><label>Course<input id="studentCourse" value="BCS" required></label><label>Semester<input id="studentSemester" value="VI" required></label><label>Email<input id="studentEmail" type="email" placeholder="student@college.edu"></label><label>Phone<input id="studentPhone" placeholder="9876543210"></label><label>Overall attendance (%)<input id="studentAttendance" type="number" min="0" max="100" value="75" required></label><div class="form-actions"><button class="primary-btn" type="submit">Save Student</button><button class="secondary-btn" type="button" id="clearStudentForm">Clear</button></div></form>
+          </section>
+          <section class="panel"><div class="panel-head"><div><h2>Post Campus Notice</h2><p>Publish announcements visible to students.</p></div></div>
+            <form id="noticeForm" class="admin-form"><label>Category<select id="adminNoticeCategory"><option>IMPORTANT</option><option>ACADEMIC</option><option>EVENT</option></select></label><label>Notice title<input id="adminNoticeTitle" required placeholder="Enter notice title"></label><label>Description<textarea id="adminNoticeDescription" required placeholder="Write the announcement..."></textarea></label><button class="primary-btn" type="submit">Publish Notice</button></form>
+          </section>
+        </div>
+        <section class="panel admin-table-panel"><div class="panel-head"><div><h2>Student Records</h2><p>View, edit, or remove student records.</p></div><input id="studentSearch" class="admin-search" placeholder="Search students..."></div><div class="table-wrap"><table class="admin-table"><thead><tr><th>Student</th><th>ID</th><th>Course</th><th>Attendance</th><th>Contact</th><th>Actions</th></tr></thead><tbody id="studentTableBody"></tbody></table></div></section>
+        <section class="panel admin-table-panel"><div class="panel-head"><div><h2>Manage Notices</h2><p>Recently published announcements.</p></div></div><div id="adminNoticeList" class="admin-notice-list"></div></section>
+      </section>
+      <footer>© 2026 Smart Campus Assistant <span>Made for a smarter campus experience</span></footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
